@@ -10,6 +10,8 @@ jobs:
 
         # Put your action repo here
         uses: trentrosenbaum/go-container-action@main
+        with:
+          myInput: Golang
 
       - name: Check outputs
         run: |
