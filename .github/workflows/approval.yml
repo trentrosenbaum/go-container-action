@@ -6,18 +6,12 @@ on:
     - edited
     - dismissed
 jobs:
-  reviews:
+  approved:
     runs-on: 'ubuntu-latest'
     steps:
-      - id: 'reviews'
+      - id: 'approved'
         uses: 'jrylan/github-action-reviews-counter@main'
         with:
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
-      - # Conditionally run the next step
         if: 'steps.reviews.outputs.approved >= 1 && steps.reviews.outputs.changes_requested == 0'
-        uses: 'approved'
-  approved:
-    name: Approved
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "This PR was approved!!!!"
+        run: echo "This PR was approved!!!!"
