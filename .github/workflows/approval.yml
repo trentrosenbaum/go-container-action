@@ -9,8 +9,8 @@ jobs:
   reviews:
     runs-on: 'ubuntu-latest'
     outputs:
-      output_num_approved: ${{ steps.reviews.outputs.approved }}
-      output_num_changes_requested: ${{ steps.reviews.outputs.changes_requested }}
+      output_num_approved: ${{ steps.get_reviews.outputs.approved }}
+      output_num_changes_requested: ${{ steps.get_reviews.outputs.changes_requested }}
     steps:
       - id: 'get_reviews'
         uses: 'jrylan/github-action-reviews-counter@main'
