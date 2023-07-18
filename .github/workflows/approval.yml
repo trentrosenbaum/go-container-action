@@ -1,4 +1,4 @@
-name: Integration Test
+name: Approval
 on:
   pull_request_review:
     types:
@@ -7,6 +7,7 @@ on:
     - dismissed
 jobs:
   approved:
+    name: Approved
     if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     steps:
