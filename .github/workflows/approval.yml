@@ -6,23 +6,13 @@ on:
     - edited
     - dismissed
 jobs:
-  reviews:
+  reviews-and-approve:
     runs-on: 'ubuntu-latest'
-    outputs:
-      output_num_approved: ${{ steps.get_reviews.outputs.approved }}
-      output_num_changes_requested: ${{ steps.get_reviews.outputs.changes_requested }}
     steps:
-      - id: 'get_reviews'
+      - name: get_reviews
         uses: 'jrylan/github-action-reviews-counter@main'
         with:
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
-  approval:
-    runs-on: 'ubuntu-latest'
-    needs: reviews
-    steps:
-      - env:
-          OUTPUT_NUM_APPROVED: ${{ needs.reviews.outputs.output_num_approved }}
-          OUTPUT_NUM_CHARGES_REQUIRED: ${{ needs.reviews.outputs.output_num_changes_requested }}
-        id: 'confirm_approval'
-        if: env.OUTPUT_NUM_APPROVED => 1 && env.OUTPUT_NUM_CHARGES_REQUIRED == 0
+      - name: approval
+        if: "${{ steps.get_reviews.outputs.approved }} => 1 && ${{ steps.get_reviews.outputs.changes_requested }} != 0"
         run: echo "This PR has been approved"
