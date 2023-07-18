@@ -10,6 +10,7 @@ func main() {
 	myInput := os.Getenv("INPUT_MYINPUT")
 	core.Debug(fmt.Sprintf("Input set to %s", myInput))
 
+	core.Info("Creating myOutput value")
 	myOutput := fmt.Sprintf("Hello %s", myInput)
 
 	core.SetOutput("myOutput", myOutput)
