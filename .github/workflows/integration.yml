@@ -1,8 +1,6 @@
 name: Integration Test
 on:
   push:
-  pull_request_review:
-    types: [ submitted, edited, dismissed ]
 jobs:
   build:
     name: Test
@@ -20,8 +18,3 @@ jobs:
       - name: Check outputs
         run: |
           test "${{ steps.selftest.outputs.myOutput }}" == "Hello Golang"
-  approved:
-    if: github.event.review.state == 'approved'
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "This PR was approved!!!"
