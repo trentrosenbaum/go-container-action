@@ -6,7 +6,7 @@ on:
       - edited
       - dismissed
 jobs:
-  count_reviews:
+  build:
     runs-on: 'ubuntu-latest'
     steps:
       - id: 'reviews'
