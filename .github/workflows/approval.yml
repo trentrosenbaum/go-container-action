@@ -1,0 +1,26 @@
+name: Approval
+on:
+  pull_request_review:
+    types:
+      - submitted
+      - edited
+      - dismissed
+jobs:
+  count_reviews:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - id: 'reviews'
+        uses: 'anorkus/github-action-reviews-counter@main'
+        with:
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'
+    outputs:
+      approved_reviews: ${{ steps.reviews.outputs.approved }}
+      changes_requested: ${{ steps.reviews.outputs.changes_requested }}
+  confirm_reviews:
+    runs-on: 'ubuntu-latest'
+    needs:
+      - count_reviews
+    if: needs.count_reviews.outputs.approved_reviews >= 1 && needs.count_reviews.outputs.changes_requested == 0
+    steps:
+      - id: approve
+        run: echo "This PR has been approved!"
