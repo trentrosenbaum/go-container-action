@@ -14,5 +14,4 @@ jobs:
         with:
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
       - if: steps.reviews.outputs.approved >= 1 && steps.reviews.outputs.changes_requested == 0
-        id: 'approve'
         run: echo "This PR has been approved!"
