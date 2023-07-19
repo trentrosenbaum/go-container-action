@@ -10,9 +10,9 @@ jobs:
     runs-on: 'ubuntu-latest'
     steps:
       - id: 'reviews'
-        uses: 'jrylan/github-action-reviews-counter@main'
+        uses: 'jrylan/github-action-reviews-counter@v1.0.0'
         with:
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
-      - if: 'steps.reviews.outputs.approved >= 1 && steps.reviews.outputs.changes_requested == 0'
+      - if: steps.reviews.outputs.approved >= 1 && steps.reviews.outputs.changes_requested == 0
         id: 'approve'
         run: echo "This PR has been approved!"
